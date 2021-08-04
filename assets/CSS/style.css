@@ -1,3 +1,7 @@
 :root {
   color: darkblue;
 }
+
+.hide {
+  display: none;
+}
