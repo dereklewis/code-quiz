@@ -8,34 +8,32 @@ var h1El = document.createElement("h1");
 var questions = [
     {
         title: "Where was Divided Sky written?",
-        choices: ["Tortola", "The Barn", "The Rhombus", "Burlington"],
+        choices: ["The Rhombus", "Tortola", "The Barn"],
         answer: "The Rhombus"
     },
     {
-        title: "What album was the first Halloween costume",
-        choices: ["Remain in the Light", "Quadrophenia", "The White Album", "Exile on Main Street"],
-        answer: "The White Album"
-    }
-    {
-        title: "Who killed the evil King Wilson?",
-        choices: ["The Unit Monster", "Possum", "Col. Forbin", "Tela"],
+        title: "Who killed the evil King Wilson",
+        choices: ["Tela", "The Unit Monster", "Possum"],
         answer: "Possum"
     }
 ];
+var questionNumber = document.querySelector("#questionNumber")
 var questionContainer = document.querySelector(".answerSection");
 var startQuiz = document.querySelector("#startBtn")
 var startSection = document.querySelector(".startQuiz")
 var parQuestion = document.querySelector("#parQuestion")
+var numberOfQuestions = questions.length
 
-//this is where functions go
-
+//event listener to display questions
+startQuiz.addEventListener("click", function(event) {
+   
+    displayQuestion()
+})
 
 function displayQuestion(){
     startSection.classList.add("hide");
 
-    let current = questions[0];
-
-    console.log(current)
+    var current = questions[0];
     
     parQuestion.textContent = current.title;
 
@@ -45,12 +43,13 @@ function displayQuestion(){
         choice.textContent = current.choices[i]; 
         document.querySelector("#list").appendChild(choice)
     }
+    
 }
 
-startQuiz.addEventListener("click", function(event) {
-    
-    displayQuestion()
-})
+
+  
+
+
 
 
 
