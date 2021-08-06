@@ -36,7 +36,7 @@ var numberOfQuestions = questions.length
 var currentIndex = 0
 var secondsLeft = 60
 var timerShown = document.querySelector(".quizTimer");
-
+var timerInterval 
 //event listener to display questions
 startQuiz.addEventListener("click", function(event) {
    
@@ -45,7 +45,7 @@ startQuiz.addEventListener("click", function(event) {
 })
 
 function setTime() {
-    var timerInterval = setInterval(function() {
+    timerInterval = setInterval(function() {
         secondsLeft--;
         timerShown.textContent = secondsLeft + "seconds left"
 
@@ -69,7 +69,7 @@ function displayQuestion(){
 
        listAnswers.innerHTML = "" 
     for(let i=0; i < current.choices.length; i++){
-        console.log(current.choices[i])
+      
         var choice = document.createElement("button")
         choice.setAttribute("class", "answerButton")
         choice.textContent = current.choices[i]; 
@@ -84,12 +84,27 @@ function answerClick(event) {
 event.preventDefault() 
 if (event.target.matches(".answerButton")) {
 
-currentIndex++
+    var answerPress = event.target.textContent
+    var correctAnswer = questions[currentIndex].answer
+    
+    if (answerPress === correctAnswer) {
+        console.log("answer is correct")
+    }
+    else {
+        secondsLeft = secondsLeft-10
+    }
 
-displayQuestion()
-//verify if the answer is correct or not
-//if answer is correct then move to the next question
-//if answer is incorrect then take time away then move to the next question
+
+currentIndex++
+if (currentIndex >= questions.length) {
+    clearInterval(timerInterval);
+}
+else {
+    displayQuestion()
+}
+
+
+//if there are no more questions then move to the score page
 }
 
 
