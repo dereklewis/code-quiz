@@ -12,24 +12,53 @@ var questions = [
         answer: "The Rhombus"
     },
     {
-        title: "Who killed the evil King Wilson",
+        title: "Who killed the evil King Wilson?",
         choices: ["Tela", "The Unit Monster", "Possum"],
         answer: "Possum"
+    },
+    {
+        title: "What was the first Halloween costume album performed?",
+        choices: ["Remain in the Light", "The White Album", "Quadrophenia"],
+        answer: "The White Album"
+    },
+    {
+        title: "What is Trey's real first name?",
+        choices: ["Terry", "William", "Earnest"],
+        answer: "Earnest"
     }
 ];
-var questionNumber = document.querySelector("#questionNumber")
+// var questionNumber = document.querySelector("#questionNumber");
 var questionContainer = document.querySelector(".answerSection");
-var startQuiz = document.querySelector("#startBtn")
-var startSection = document.querySelector(".startQuiz")
-var parQuestion = document.querySelector("#parQuestion")
+var startQuiz = document.querySelector("#startBtn");
+var startSection = document.querySelector(".startQuiz");
+var parQuestion = document.querySelector("#parQuestion");
 var numberOfQuestions = questions.length
 var currentIndex = 0
+var secondsLeft = 60
+var timerShown = document.querySelector(".quizTimer");
 
 //event listener to display questions
 startQuiz.addEventListener("click", function(event) {
    
     displayQuestion()
+    setTime()
 })
+
+function setTime() {
+    var timerInterval = setInterval(function() {
+        secondsLeft--;
+        timerShown.textContent = secondsLeft + "seconds left"
+
+        if(secondsLeft === 0) {
+            clearInterval(timerInterval);
+            timerShown.textContent = "Game Over"
+
+            //this is the function for the last page
+            // scorePage()
+        }
+    }, 1000);
+    
+}
 
 function displayQuestion(){
     startSection.classList.add("hide");
@@ -66,6 +95,9 @@ displayQuestion()
 
 
 }
+
+//function needed to display score
+// function scorePage()
 
 
 
