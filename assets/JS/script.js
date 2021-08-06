@@ -1,7 +1,7 @@
 //this is where variables
 
 var body = document.body;
-var listAnswers = document.createElement("ol");
+var listAnswers = document.querySelector("#list");
 var li1 = document.createElement("li");
 var h1El = document.createElement("h1");
 // console.log(h1El)
@@ -23,6 +23,7 @@ var startQuiz = document.querySelector("#startBtn")
 var startSection = document.querySelector(".startQuiz")
 var parQuestion = document.querySelector("#parQuestion")
 var numberOfQuestions = questions.length
+var currentIndex = 0
 
 //event listener to display questions
 startQuiz.addEventListener("click", function(event) {
@@ -32,23 +33,39 @@ startQuiz.addEventListener("click", function(event) {
 
 function displayQuestion(){
     startSection.classList.add("hide");
-
-    var current = questions[0];
     
+    var current = questions[currentIndex];
+
     parQuestion.textContent = current.title;
 
+       listAnswers.innerHTML = "" 
     for(let i=0; i < current.choices.length; i++){
         console.log(current.choices[i])
         var choice = document.createElement("button")
+        choice.setAttribute("class", "answerButton")
         choice.textContent = current.choices[i]; 
         document.querySelector("#list").appendChild(choice)
     }
     
 }
 
-
+listAnswers.addEventListener("click", answerClick)
   
+function answerClick(event) {
+event.preventDefault() 
+if (event.target.matches(".answerButton")) {
 
+currentIndex++
+
+displayQuestion()
+//verify if the answer is correct or not
+//if answer is correct then move to the next question
+//if answer is incorrect then take time away then move to the next question
+}
+
+
+
+}
 
 
 
